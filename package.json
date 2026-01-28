@@ -1,0 +1,16 @@
+{
+  "name": "devmedia",
+  "version": "1.0.0",
+  "description": "First NodeJS Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "author": "Pavan Kumar N",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
