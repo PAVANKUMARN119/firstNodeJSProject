@@ -37,6 +37,26 @@ app.get("/abc", (req, res) => {
 // app.use((req, res) => {
 //   res.send("SERVER IS RUNNING");
 // });
+
+///The below is for multiple route handlers
+
+app.use(
+  "/newRoute",
+  [
+    (req, res, next) => {
+      console.log("1st route handler");
+      next();
+    },
+    (req, res, next) => {
+      console.log("2nd route handlers");
+      next();
+    },
+  ],
+  (req, res) => {
+    console.log("3rd route handlers");
+    res.send("3rd route handler server");
+  },
+);
 app.listen(3000, () => {
   console.log("server started successfully");
 });
