@@ -1,5 +1,5 @@
 const express = require("express");
-
+const { authHandler } = require("./middleWares/auth");
 const app = express();
 
 app.use("/test", (req, res) => {
@@ -57,6 +57,13 @@ app.use(
     res.send("3rd route handler server");
   },
 );
+
+// starting with the actual middlewares of route handlers
+
+app.use("/user", authHandler);
+app.get("/user/getUsers", (req, res, next) => {
+  res.send("authorised get user");
+});
 app.listen(3000, () => {
   console.log("server started successfully");
 });
