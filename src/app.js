@@ -58,7 +58,7 @@ app.post("/updateUserById", async (req, res) => {
   const userId = req.body.userId;
   const data = req.body;
   try {
-    const user = await User.findByIdAndUpdate({ _id: userId }, data);
+    await User.findByIdAndUpdate({ _id: userId }, data);
     res.send("updated user successfully");
   } catch (err) {
     res.status(400).send("something went wrong");
@@ -70,10 +70,13 @@ app.patch("/updateUser", async (req, res) => {
   const emailId = req.body.emailId;
   const data = req.body;
   try {
-    const user = await User.findOneAndUpdate({ emailId: emailId }, data);
+    await User.findOneAndUpdate({ emailId: emailId }, data, {
+      returnDocument: "before",
+      runValidators: true,
+    });
     res.send("updated user successfully");
   } catch (err) {
-    res.status(400).send("something went wrong");
+    res.status(400).send(`update failed + ${err.message}`);
   }
 });
 
